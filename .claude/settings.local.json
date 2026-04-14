@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(git init:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(grep -h \"^public class\\\\|^class \" Assets/Scripts/*.cs)",
+      "Bash(grep -h \"^public class\\\\|^class \" Scripts2/*.cs)",
+      "Bash([ -f \"Assets/Scripts/$file\" ])",
+      "Bash([ -f \"Scripts2/$file\" ])"
+    ]
+  }
+}
