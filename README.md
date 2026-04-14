@@ -18,7 +18,6 @@ Assets/
 │   ├── DataLoader.cs              # Ingests sensor_data.csv
 │   ├── SessionScheduleLoader.cs   # Reads session_schedule.csv for agenda redirects
 │   ├── AnalyticsManager.cs        # Position logging, heatmap, validation reports
-│   ├── HeatmapOverlay.cs          # Real-time heatmap visualisation
 │   ├── FlowSensorTrigger.cs       # Collider triggers that count foot traffic
 │   ├── CongestionMonitor.cs       # Bottleneck detection and event logging
 │   ├── CalibrationManager.cs      # Auto-calibrates gravity β after each run
@@ -47,33 +46,38 @@ Assets/
 
 ---
 
-## Simulation Mechanics
+## How It Works
+
+### Startup
+`CrowdManager` initializes first. It finds every `ConferenceZone` in the scene, tells `DataLoader` to parse `sensor_data.csv` (timestamped headcount snapshots from the real Posterbuddy sensors), and pre-warms a pool of 300 agent GameObjects ready to activate. `SessionScheduleLoader` reads `session_schedule.csv` so it knows when talks start and which zones to pull people toward.
 
 ### Spawning
-Agents arrive via a **Poisson process** driven by `sensor_data.csv` headcounts. Inter-arrival times are sampled as `Δt = -ln(U) / λ`, producing realistic bursty arrivals. Agents can arrive in social groups (Poisson-distributed size, mean ~2.3).
+Every frame, `CrowdManager` checks if the sim clock has passed the next scheduled arrival. Those events come from the CSV — if the sensor recorded 40 people entering a zone in a 15-minute window, the sim converts that to a **Poisson process** so agents trickle in naturally rather than all at once. When an agent spawns, there's a chance it arrives as part of a **social group** (Poisson-distributed size, average ~2.3 people). Each agent is also assigned a **persona** — Researcher (40%), Networker (25%), Student (20%), Industry (10%), BoothStaff (5%) — which sets their base speed, dwell behaviour, social tendencies, and topic interests.
 
-### Agent Behaviour
-Each agent runs a 6-state FSM: **Transit → Dwelling → Roaming → Socializing → Resting → Exiting**. Zone selection uses a **gravity model** — agents prefer nearer zones, zones matching their topic interests, and zones they haven't visited yet. Hunger and thirst drives can override zone selection to route agents to food/drink zones.
+### Each Agent's Life
+Agents run a 6-state machine:
 
-### Social Force Model (Helbing et al.)
-Movement in Transit is governed by three forces summed each `FixedUpdate`:
-- **Driving force** — pulls toward NavMesh waypoint at desired speed with relaxation time τ = 0.5 s
-- **Agent repulsion** — exponential repulsion + body compression + sliding friction on contact
-- **Wall repulsion** — same form, using `NavMesh.FindClosestEdge` (no physics collider overhead)
+- **Transit** — walking to a zone. NavMesh handles pathfinding, but velocity each frame is computed by the **Social Force Model**: a pull toward the destination, repulsion from nearby agents (via spatial hash grid, O(n)), and repulsion from walls (via `NavMesh.FindClosestEdge`). Agents react more to people ahead of them than behind, which naturally produces lane formation in corridors.
+- **Dwelling** — stationary at the zone. Duration sampled from a log-normal distribution (median ~5 min). Gets shorter with each subsequent booth visited — the 10th booth gets ~60% of the time the first one did (museum fatigue).
+- **Roaming** — slow wandering near the zone. Heading is an Ornstein-Uhlenbeck process: random but mean-reverting toward the zone centre so agents don't drift into walls.
+- **Socializing** — stopped for a conversation cluster (1–10 min). Contagious within social groups: if one member starts socializing, there's a 70% chance their companions join. Optionally fires a Claude Haiku API call to generate a conversation snippet.
+- **Resting** — sitting down (5–20 min), partially recovering fatigue.
+- **Exiting** — routes to the nearest exit and returns to the object pool.
 
-Agents respond more to people ahead of them than behind (anisotropy λ = 0.5). Neighbour queries use a spatial hash grid — O(n), not O(n²).
+### Zone Selection
+When an agent finishes dwelling, it scores every zone using a **gravity model**:
 
-### Fatigue
-Walking speed decays with cumulative walk time (floor at 75% of starting speed, time constant ~120 min). Dwell time at each subsequent booth also decays as a power law (Bitgood 2009). Fatigued agents become more sensitive to distance in the gravity model, preferring nearby booths.
+```
+score = attractiveness × exp(-β × distance) × visit_penalty × crowd_penalty
+```
 
-### Dwell Time
-Time at each booth is sampled from a **log-normal distribution** (median ~5 min, σ = 0.8), scaled by persona and visit-number decay.
+`β` (impedance) increases as the agent fatigues, so tired agents strongly prefer nearby booths. Attractiveness is boosted when zone topic tags match the agent's persona. Crowd penalty is a sigmoid — as density climbs past ~2 persons/m², the chance of entering drops smoothly to near zero. Hunger and thirst **override** all of this once they cross their thresholds, routing the agent to the nearest food or drink zone.
 
-### Personas
-Five agent types (Researcher 40%, Networker 25%, Student 20%, Industry 10%, BoothStaff 5%) with distinct speed, dwell, socializing, and fatigue multipliers, and topic affinities.
+### Session Redirects
+When a talk is scheduled to start, `SessionScheduleLoader` reroutes a subset of free agents to the session room. With `smoothSessionRedirects = true`, agents finish their current activity first (max 2-minute delay) before redirecting — no jarring teleports.
 
-### Validation
-On quit, the simulation computes RMSE, NRMSE, χ², and Pearson r against `sensor_data.csv` and writes `validation_report.json`. `CalibrationManager` uses these results to adjust gravity parameters for the next run.
+### Analytics & Validation
+`AnalyticsManager` logs agent positions every 0.5 s, zone occupancy every 30 s, and flow counts every 60 s. On quit it writes the heatmap (CSV + false-colour PNG) and runs validation against the observed sensor data — computing RMSE, NRMSE, χ², and Pearson r. `CalibrationManager` reads those results and nudges the gravity β for the next run.
 
 For full equations and parameter derivations, see `Pedestrian_Dynamics_Reference.md`.
 
