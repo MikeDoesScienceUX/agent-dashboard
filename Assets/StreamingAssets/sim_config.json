@@ -1,0 +1,6 @@
+{
+  "agentSpeed": 2,
+  "personalBubble": 1.1,
+  "fatiguePerSecond": 0.03,
+  "minSpeedMultiplier": 0.35
+}

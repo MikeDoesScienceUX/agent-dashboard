@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b7fbb39ac8c6c42a1af3425feff1df, type: 3}
+  m_Name: SimConfig
+  m_EditorClassIdentifier: Assembly-CSharp::SimConfig
+  desiredSpeed: 1.34
+  relaxationTime: 0.5
+  agentRadius: 0.25
+  socialForceA: 2000
+  socialForceB: 0.08
+  bodyCompressionK: 120000
+  slidingFrictionKappa: 240000
+  anisotropyLambda: 0.5
+  agentMass: 80
+  fatigueTimeConstant: 7200
+  minSpeedFraction: 0.75
+  dwellDecayExponent: 0.2
+  dwellMu: 5.7
+  dwellSigma: 0.8
+  roamSpeedMin: 0.4
+  roamSpeedMax: 0.9
+  gravityBeta0: 0.15
+  fatigueZoneBias: 0.75
+  roamReorientRate: 0.5
+  roamDirectionNoise: 0.3
+  boothCrowdThreshold: 2
+  boothDensityRadius: 3
+  socializeDurationMin: 60
+  socializeDurationMax: 600
+  restDurationMin: 300
+  restDurationMax: 1200
+  analyticsLogInterval: 0.5
+  analyticsExportPath: SimOutput/spatial_log.csv
+  validationExportPath: SimOutput/validation_report.json
