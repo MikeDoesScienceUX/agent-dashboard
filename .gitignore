@@ -38,3 +38,8 @@ Thumbs.db
 
 # Upgrade logs
 UpgradeLog*.htm
+
+# Editor / IDE config
+.vscode/
+.vsconfig
+.claude/
