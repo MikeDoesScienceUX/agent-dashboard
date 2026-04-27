@@ -283,12 +283,20 @@ public class CrowdManager : MonoBehaviour
         }
 
         GameObject go = GetFromPool();
+        go.transform.position = hit.position;
         go.transform.rotation = Quaternion.identity;
 
-        // Warp (not transform.position) ensures NavMeshAgent registers on the mesh before Initialize runs.
+        // Enable NavMeshAgent and Warp to the valid position BEFORE SetActive(true).
+        // This prevents "not close enough to NavMesh" errors that fire when OnEnable
+        // runs during SetActive if the agent is still at a stale/invalid position.
         var nav = go.GetComponent<UnityEngine.AI.NavMeshAgent>();
-        if (nav != null) nav.Warp(hit.position);
-        else go.transform.position = hit.position;
+        if (nav != null)
+        {
+            nav.enabled = true;
+            nav.Warp(hit.position);
+        }
+
+        go.SetActive(true);
 
         int personaIdx = SamplePersona();
 
@@ -331,21 +339,25 @@ public class CrowdManager : MonoBehaviour
 
     private GameObject CreateNewAgent()
     {
+        // Instantiate with the prefab temporarily inactive so NavMeshAgent's OnEnable
+        // never fires at the prefab's saved position (origin). Awake still runs; OnEnable does not.
+        bool wasActive = agentPrefab.activeSelf;
+        agentPrefab.SetActive(false);
         var go = Instantiate(agentPrefab);
-        go.SetActive(false);
-        return go;
+        agentPrefab.SetActive(wasActive);
+        return go;  // inactive, NavMeshAgent has not registered yet
     }
 
+    // Returns an inactive GameObject — SpawnAgent is responsible for positioning,
+    // enabling NavMeshAgent, Warping, then calling SetActive(true).
     private GameObject GetFromPool()
     {
         while (_pool.Count > 0)
         {
             var go = _pool.Dequeue();
-            if (go != null) { go.SetActive(true); return go; }
+            if (go != null) return go;
         }
-        var fresh = Instantiate(agentPrefab);
-        fresh.SetActive(true);
-        return fresh;
+        return CreateNewAgent();
     }
 
     public void ReturnToPool(GameObject go)
@@ -353,6 +365,10 @@ public class CrowdManager : MonoBehaviour
         if (go == null) return;
         var ac = go.GetComponent<AgentController>();
         if (ac != null) { UnregisterAgent(ac); ac.ResetForPool(); }
+        // Disable NavMeshAgent before deactivating so it unregisters cleanly
+        // and won't re-register at a stale position on the next SetActive(true).
+        var nav = go.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        if (nav != null) nav.enabled = false;
         go.SetActive(false);
         _pool.Enqueue(go);
     }
