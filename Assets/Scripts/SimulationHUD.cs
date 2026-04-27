@@ -26,7 +26,9 @@ public class SimulationHUD : MonoBehaviour
     public bool    showHUD       = true;
 
     [Header("Layout")]
-    public float panelWidth = 330f;
+    public float panelWidth = 310f;
+    [Tooltip("0 = auto-scale to screen height. Set manually (e.g. 0.7) to override.")]
+    public float uiScale = 0f;
 
     // ── State colours (match AgentColorizer defaults) ───────────────
     private static readonly Color[] StateColors =
@@ -54,6 +56,8 @@ public class SimulationHUD : MonoBehaviour
     private GUIStyle _title, _label, _subLabel, _warnLabel, _errorLabel;
     private Texture2D _white;
     private bool _stylesReady;
+
+    private Vector2 _zoneScroll;
 
     // ── Lifecycle ───────────────────────────────────────────────────
 
@@ -118,7 +122,15 @@ public class SimulationHUD : MonoBehaviour
 
         EnsureStyles();
 
-        // Dynamically calculate panel height
+        // Apply UI scale — auto fits to screen height (reference: 1080p), user can override
+        float s = uiScale > 0f ? uiScale : Mathf.Clamp(Screen.height / 1080f, 0.55f, 1f);
+        Matrix4x4 prevMatrix = GUI.matrix;
+        GUI.matrix = Matrix4x4.Scale(new Vector3(s, s, 1f));
+
+        // All layout coordinates below are in logical (1/s scaled) space
+        float logW = Screen.width  / s;
+        float logH = Screen.height / s;
+
         int zoneCount    = _zones != null ? _zones.Length : 0;
         int stateCount   = System.Enum.GetValues(typeof(AgentController.AgentState)).Length;
         int personaCount = _cfg != null && _cfg.personas != null ? _cfg.personas.Length : 0;
@@ -129,15 +141,22 @@ public class SimulationHUD : MonoBehaviour
         bool hasDanger  = congestionMonitor != null && congestionMonitor.HasDanger;
         bool hasWarning = congestionMonitor != null && congestionMonitor.HasWarning;
 
-        float h = 46 + 22 + 22 + 50 + 8 + 18 + stateCount * 20 + 8
-                + (_paused || hasDanger || hasWarning ? 28f : 0f)
-                + (personaCount > 0 ? 20 + personaCount * 18 + 8 : 0)
-                + (zoneCount    > 0 ? 20 + zoneCount    * 22 + 8 : 0)
-                + (sessCount    > 0 ? 20 + sessCount    * 18 + 8 : 0)
-                + (issueCount   > 0 ? 20 + issueCount   * 18 + 8 : 0)
-                + 22;
+        // Fixed-height sections
+        float fixedH = 46 + 22 + 22 + 50 + 8 + 18 + stateCount * 20 + 8
+                     + (_paused || hasDanger || hasWarning ? 28f : 0f)
+                     + (personaCount > 0 ? 20 + personaCount * 18 + 8 : 0)
+                     + (sessCount    > 0 ? 20 + sessCount    * 18 + 8 : 0)
+                     + (issueCount   > 0 ? 20 + issueCount   * 18 + 8 : 0)
+                     + 22;
 
-        float px = Screen.width - panelWidth - 12f;
+        // Zone section: allow up to the remaining vertical space, with scroll if needed
+        float zoneInnerH    = zoneCount > 0 ? 20 + zoneCount * 22 + 8 : 0;
+        float availH        = logH - 24f;
+        float maxZoneViewH  = Mathf.Max(0, availH - fixedH);
+        float zoneViewH     = zoneCount > 0 ? Mathf.Min(zoneInnerH, maxZoneViewH) : 0;
+
+        float h  = fixedH + zoneViewH;
+        float px = logW - panelWidth - 12f;
         float py = 12f;
 
         DrawPanel(px, py, panelWidth, h);
@@ -268,24 +287,29 @@ public class SimulationHUD : MonoBehaviour
             cy += 8f;
         }
 
-        // ── Zone occupancy ────────────────────────────────────────
-        if (_zones != null && _zones.Length > 0)
+        // ── Zone occupancy (scrollable) ───────────────────────────
+        if (_zones != null && _zones.Length > 0 && zoneViewH > 0f)
         {
             GUI.Label(new Rect(cx, cy, cw, 18f), "Zone Occupancy", _subLabel);
             cy += 20f;
 
+            Rect viewRect  = new Rect(cx, cy, cw, zoneViewH - 20f);
+            Rect innerRect = new Rect(0, 0, cw - 16f, zoneCount * 22f);
+            _zoneScroll = GUI.BeginScrollView(viewRect, _zoneScroll, innerRect, false, false);
+
+            float zy = 0f;
+            float zwi = innerRect.width;
             foreach (var z in _zones)
             {
                 int   n       = crowdManager.GetZoneCount(z.sensorId);
                 float density = crowdManager.GetBoothDensity(z.sensorId);
                 float fill    = Mathf.Clamp01(density / 3f);
 
-                // Ground-truth occupancy from CSV
                 DataLoader dl = crowdManager.dataLoader;
                 int gt = dl != null && dl.IsLoaded
                     ? dl.GetGroundTruth(z.sensorId, crowdManager.SimClock) : -1;
 
-                GUI.Label(new Rect(cx, cy, 88f, 18f), z.displayName, _label);
+                GUI.Label(new Rect(0, zy, 88f, 18f), z.displayName, _label);
 
                 if (congestionMonitor != null)
                 {
@@ -293,47 +317,46 @@ public class SimulationHUD : MonoBehaviour
                     string lbl  = congestionMonitor.GetStatusLabel(z.sensorId);
                     Color prev2 = GUI.color;
                     GUI.color = sc;
-                    GUI.Label(new Rect(cx + 90f, cy, 40f, 18f), lbl, _label);
+                    GUI.Label(new Rect(90f, zy, 40f, 18f), lbl, _label);
                     GUI.color = prev2;
                 }
 
-                float bx = cx + 132f;
-                float bw = cw - 196f;
+                float bx = 132f;
+                float bw = zwi - 196f;
 
                 Color prev = GUI.color;
                 GUI.color  = new Color(0.12f, 0.12f, 0.12f, 0.9f);
-                GUI.DrawTexture(new Rect(bx, cy + 3f, bw, 13f), _white);
+                GUI.DrawTexture(new Rect(bx, zy + 3f, bw, 13f), _white);
 
                 if (fill > 0f)
                 {
                     GUI.color = Color.Lerp(new Color(0.2f, 0.9f, 0.35f),
                                            new Color(1f, 0.25f, 0.25f), fill);
-                    GUI.DrawTexture(new Rect(bx, cy + 3f, bw * fill, 13f), _white);
+                    GUI.DrawTexture(new Rect(bx, zy + 3f, bw * fill, 13f), _white);
                 }
 
-                // Sim count — coloured by accuracy vs CSV ground truth
                 GUI.color = Color.white;
                 if (gt >= 0)
                 {
                     float err = gt > 0 ? Mathf.Abs(n - gt) / (float)gt : (n > 0 ? 1f : 0f);
-                    GUI.color = err < 0.10f ? new Color(0.25f, 1.0f, 0.45f)   // ≤10 % — green
-                              : err < 0.25f ? new Color(1.0f,  0.85f, 0.15f)  // ≤25 % — yellow
-                                            : new Color(1.0f,  0.30f, 0.30f); // >25 % — red
+                    GUI.color = err < 0.10f ? new Color(0.25f, 1.0f, 0.45f)
+                              : err < 0.25f ? new Color(1.0f,  0.85f, 0.15f)
+                                            : new Color(1.0f,  0.30f, 0.30f);
                 }
-                GUI.Label(new Rect(bx + bw + 4f, cy, 28f, 18f), n.ToString(), _label);
+                GUI.Label(new Rect(bx + bw + 4f, zy, 28f, 18f), n.ToString(), _label);
 
-                // CSV ground-truth count in dim white
                 if (gt >= 0)
                 {
                     GUI.color = new Color(0.65f, 0.65f, 0.65f);
-                    GUI.Label(new Rect(bx + bw + 32f, cy, 34f, 18f), $"/{gt}", _label);
+                    GUI.Label(new Rect(bx + bw + 32f, zy, 34f, 18f), $"/{gt}", _label);
                 }
 
                 GUI.color = prev;
-                cy += 22f;
+                zy += 22f;
             }
 
-            cy += 8f;
+            GUI.EndScrollView();
+            cy += zoneViewH - 20f + 8f;
         }
 
         // ── Session schedule ──────────────────────────────────────
@@ -376,7 +399,9 @@ public class SimulationHUD : MonoBehaviour
 
         // ── Hotkey hint ───────────────────────────────────────────
         GUI.Label(new Rect(cx, cy, cw, 18f),
-            $"[{toggleHUD}] HUD  [{toggleHeatmap}] heat  [{pauseKey}] pause  [{screenshotKey}] snap  [Tab/`] halls  [F1] hall panel", _subLabel);
+            $"[{toggleHUD}] HUD  [{toggleHeatmap}] heat  [{pauseKey}] pause  [{screenshotKey}] snap  [Tab] halls", _subLabel);
+
+        GUI.matrix = prevMatrix;
     }
 
     // ── Drawing Helpers ─────────────────────────────────────────────
