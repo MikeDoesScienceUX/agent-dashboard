@@ -275,12 +275,20 @@ public class CrowdManager : MonoBehaviour
                         (spawnPoints != null && spawnPoints.Length > 0);
         if (!hasSpawn) return;
 
-        GameObject go  = GetFromPool();
-        Vector3    pos = origin.position + new Vector3(Random.Range(-0.8f, 0.8f), 0, Random.Range(-0.8f, 0.8f));
-        if (NavMesh.SamplePosition(pos, out var hit, 3f, NavMesh.AllAreas)) pos = hit.position;
+        Vector3 pos = origin.position + new Vector3(Random.Range(-0.8f, 0.8f), 0, Random.Range(-0.8f, 0.8f));
+        if (!NavMesh.SamplePosition(pos, out var hit, 3f, NavMesh.AllAreas))
+        {
+            Debug.LogWarning($"[CrowdManager] Spawn skipped for '{zoneId}': no NavMesh within 3 m of {pos}");
+            return;
+        }
 
-        go.transform.position = pos;
+        GameObject go = GetFromPool();
         go.transform.rotation = Quaternion.identity;
+
+        // Warp (not transform.position) ensures NavMeshAgent registers on the mesh before Initialize runs.
+        var nav = go.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        if (nav != null) nav.Warp(hit.position);
+        else go.transform.position = hit.position;
 
         int personaIdx = SamplePersona();
 

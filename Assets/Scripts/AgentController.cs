@@ -465,6 +465,12 @@ public class AgentController : MonoBehaviour
         CurrentState = next;
         ApplyStateColor(next);
 
+        if (!_nav.isOnNavMesh)
+        {
+            Debug.LogWarning($"[AgentController] EnterState({next}) skipped NavMesh calls — agent not on NavMesh.");
+            return;
+        }
+
         switch (next)
         {
             case AgentState.Transit:
@@ -892,6 +898,7 @@ public class AgentController : MonoBehaviour
 
     private void SetNavDest(Vector3 target)
     {
+        if (!_nav.isOnNavMesh) return;
         if (NavMesh.SamplePosition(target, out var hit, 5f, NavMesh.AllAreas))
             _nav.SetDestination(hit.position);
     }
