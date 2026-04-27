@@ -84,7 +84,7 @@ public class CalibrationManager : MonoBehaviour
 
             foreach (var (sensorId, bias, meanObs) in sensors)
             {
-                if (meanObs < 1f) continue;  // not enough observed data
+                if (meanObs <= 0f) continue;  // guard: prevent division by zero
 
                 // Normalised bias: how far off are we as a fraction of the observed mean?
                 float normBias = bias / meanObs;

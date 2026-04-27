@@ -182,9 +182,18 @@ public class AnalyticsManager : MonoBehaviour
         // Flush spatial log every 5000 lines
         if (_spatialLines >= 5000)
         {
-            File.AppendAllText(_spatialPath, _spatialBuf.ToString());
-            _spatialBuf.Clear();
-            _spatialLines = 0;
+            try
+            {
+                File.AppendAllText(_spatialPath, _spatialBuf.ToString());
+                _spatialBuf.Clear();
+                _spatialLines = 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[AnalyticsManager] Spatial log flush failed: {ex.Message}. Buffer cleared to prevent OOM.");
+                _spatialBuf.Clear();
+                _spatialLines = 0;
+            }
         }
     }
 
@@ -224,9 +233,18 @@ public class AnalyticsManager : MonoBehaviour
 
         if (_zoneLines >= 2000)
         {
-            File.AppendAllText(_zoneTimePath, _zoneTimeBuf.ToString());
-            _zoneTimeBuf.Clear();
-            _zoneLines = 0;
+            try
+            {
+                File.AppendAllText(_zoneTimePath, _zoneTimeBuf.ToString());
+                _zoneTimeBuf.Clear();
+                _zoneLines = 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[AnalyticsManager] Zone timeseries flush failed: {ex.Message}. Buffer cleared.");
+                _zoneTimeBuf.Clear();
+                _zoneLines = 0;
+            }
         }
     }
 
@@ -307,8 +325,15 @@ public class AnalyticsManager : MonoBehaviour
         _exported = true;
 
         // Flush remaining buffers
-        if (_spatialBuf.Length  > 0) File.AppendAllText(_spatialPath,  _spatialBuf.ToString());
-        if (_zoneTimeBuf.Length > 0) File.AppendAllText(_zoneTimePath, _zoneTimeBuf.ToString());
+        try
+        {
+            if (_spatialBuf.Length  > 0) File.AppendAllText(_spatialPath,  _spatialBuf.ToString());
+            if (_zoneTimeBuf.Length > 0) File.AppendAllText(_zoneTimePath, _zoneTimeBuf.ToString());
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"[AnalyticsManager] Final buffer flush failed: {ex.Message}");
+        }
 
         ExportHeatmap();
         var report = RunValidation();

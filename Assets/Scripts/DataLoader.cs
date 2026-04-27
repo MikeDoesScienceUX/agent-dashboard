@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 /// <summary>
@@ -143,17 +144,33 @@ public class DataLoader : MonoBehaviour
 
             try
             {
+                string rawZoneId = cols[iZone].Trim();
+                if (!IsValidZoneId(rawZoneId))
+                {
+                    Debug.LogWarning($"[DataLoader] Skipping row {i}: invalid zone_id '{rawZoneId}'");
+                    continue;
+                }
+
+                int enters = int.Parse(cols[iEnters].Trim());
+                int exits  = int.Parse(cols[iExits].Trim());
+                int occ    = iOcc >= 0 && iOcc < cols.Length ? int.Parse(cols[iOcc].Trim()) : 0;
+
+                if (enters < 0 || exits < 0)
+                {
+                    Debug.LogWarning($"[DataLoader] Skipping row {i}: negative enters/exits ({enters}/{exits})");
+                    continue;
+                }
+
                 var snap = new SensorSnapshot
                 {
                     // Accept both "2026-05-07T09:00:00" (no Z) and "2026-05-07T09:00:00Z"
                     timestamp         = DateTime.Parse(cols[iTimestamp].Trim(),
                                             CultureInfo.InvariantCulture,
                                             DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeUniversal),
-                    zoneId            = cols[iZone].Trim(),
-                    enters            = int.Parse(cols[iEnters].Trim()),
-                    exits             = int.Parse(cols[iExits].Trim()),
-                    occupancySnapshot = iOcc >= 0 && iOcc < cols.Length
-                                            ? int.Parse(cols[iOcc].Trim()) : 0
+                    zoneId            = rawZoneId,
+                    enters            = enters,
+                    exits             = exits,
+                    occupancySnapshot = occ
                 };
                 allSnapshots.Add(snap);
                 ZoneIds.Add(snap.zoneId);
@@ -216,4 +233,8 @@ public class DataLoader : MonoBehaviour
                 return i;
         return -1;
     }
+
+    private static readonly Regex ZoneIdPattern = new Regex(@"^[A-Za-z0-9_\-]{1,64}$", RegexOptions.Compiled);
+
+    private static bool IsValidZoneId(string id) => !string.IsNullOrEmpty(id) && ZoneIdPattern.IsMatch(id);
 }

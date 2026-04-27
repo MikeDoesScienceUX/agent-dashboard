@@ -406,7 +406,9 @@ public class AgentController : MonoBehaviour
             {
                 string next = PickDestinationZone();
                 if (next != TargetSensorId) { _manager.MoveAgentToZone(this, next); return; }
-                EnterState(AgentState.Transit);
+                // Gravity model returned same zone — extend roaming rather than looping back to Dwelling
+                _stateTimer = Random.Range(30f, 90f);
+                return;
             }
             else if (r < 0.55f)                                       EnterState(AgentState.Socializing);
             else if (r < 0.55f + fatigueRatio * 0.35f * phaseRest)   EnterState(AgentState.Resting);

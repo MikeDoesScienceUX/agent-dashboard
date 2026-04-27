@@ -63,6 +63,9 @@ public class LLMConversationClient : MonoBehaviour
     {
         if (config       == null) config       = ScriptableObject.CreateInstance<SimConfig>();
         if (crowdManager == null) crowdManager = FindFirstObjectByType<CrowdManager>();
+
+        if (!config.llmEnabled)
+            Debug.Log("[LLMClient] LLM conversation generation is disabled (SimConfig.llmEnabled = false).");
     }
 
     // ── Public API ───────────────────────────────────────────────────
@@ -115,7 +118,12 @@ public class LLMConversationClient : MonoBehaviour
             _callsThisSimMinute     = 0;
         }
 
-        if (_callsThisSimMinute >= config.llmCallsPerSimMinute) return false;
+        if (_callsThisSimMinute >= config.llmCallsPerSimMinute)
+        {
+            Debug.LogWarning($"[LLMClient] Budget exceeded ({config.llmCallsPerSimMinute}/sim-min). " +
+                             "Increase SimConfig.llmCallsPerSimMinute or disable LLM for large crowds.");
+            return false;
+        }
         _callsThisSimMinute++;
         return true;
     }
@@ -180,6 +188,7 @@ public class LLMConversationClient : MonoBehaviour
         request.SetRequestHeader("Content-Type",        "application/json");
         request.SetRequestHeader("x-api-key",           apiKey);
         request.SetRequestHeader("anthropic-version",   ApiVersion);
+        request.timeout = 10;
 
         yield return request.SendWebRequest();
 
