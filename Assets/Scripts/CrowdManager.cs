@@ -487,6 +487,13 @@ public class CrowdManager : MonoBehaviour
         return string.Empty;
     }
 
+    /// <summary>Returns the sectionId of a zone (e.g. "Hall7"). Empty string = unconstrained.</summary>
+    public string GetZoneSection(string sensorId)
+    {
+        if (_zoneLookup.TryGetValue(sensorId, out var z)) return z.sectionId;
+        return string.Empty;
+    }
+
     /// <summary>Returns the topic tags of a zone (e.g. ["NASH", "HCC"]).</summary>
     public string[] GetZoneTopics(string sensorId)
     {

@@ -21,6 +21,10 @@ public class ConferenceZone : MonoBehaviour
     [Tooltip("Human-readable name shown in the HUD and Editor tools.")]
     public string displayName = "Zone A";
 
+    [Tooltip("Which hall/section this zone belongs to (e.g. 'Hall7', 'Hall8'). " +
+             "Agents only pick destinations within the same section. Leave blank to allow cross-section travel.")]
+    public string sectionId = "";
+
     [Tooltip("Approximate walkable floor area in m². Used for density calculation.")]
     public float areaM2 = 20f;
 

@@ -705,17 +705,31 @@ public class AgentController : MonoBehaviour
             _agendaQueue.Dequeue(); // discard stale entry
         }
 
-        // Gravity model
-        float beta  = _config.gravityBeta0 *
-                      (1f + _config.fatigueZoneBias * _walkTime /
-                       Mathf.Max(1f, _config.fatigueTimeConstant * _fatigueMult));
+        // Gravity model — restricted to the agent's current section so agents
+        // don't try to navigate to zones in other halls across NavMesh boundaries.
+        string mySection = _manager.GetZoneSection(TargetSensorId);
 
-        var   weights = new float[_manager.Zones.Length];
-        float total   = 0f;
+        float beta = _config.gravityBeta0 *
+                     (1f + _config.fatigueZoneBias * _walkTime /
+                      Mathf.Max(1f, _config.fatigueTimeConstant * _fatigueMult));
+
+        var   weights   = new float[_manager.Zones.Length];
+        float total     = 0f;
+        int   validCount = 0;
 
         for (int i = 0; i < _manager.Zones.Length; i++)
         {
-            var   z        = _manager.Zones[i];
+            var z = _manager.Zones[i];
+
+            // Skip zones in a different section unless either zone has no section set
+            string zSection = _manager.GetZoneSection(z.sensorId);
+            if (!string.IsNullOrEmpty(mySection) && !string.IsNullOrEmpty(zSection) &&
+                mySection != zSection)
+            {
+                weights[i] = 0f;
+                continue;
+            }
+
             float dist     = Vector3.Distance(transform.position, z.GoalTransform.position);
             float dens     = _manager.GetBoothDensity(z.sensorId);
             float interest = GetZoneInterest(z.sensorId);
@@ -724,8 +738,6 @@ public class AgentController : MonoBehaviour
                 ? Mathf.Pow(0.30f, _visitPenaltyMult)
                 : 1.0f;
 
-            // Quadratic density aversion: packed zones become much less attractive
-            // than linear (1+dens) would, preventing persistent crowding feedback loops.
             weights[i] = Mathf.Max(
                 z.areaM2 * (0.5f + interest * 0.5f) *
                 Mathf.Exp(-beta * dist) *
@@ -733,15 +745,16 @@ public class AgentController : MonoBehaviour
                 (1f + dens * dens),
                 0f);
             total += weights[i];
+            validCount++;
         }
 
-        // Proportional floor: every zone gets at least 2% of an equal share,
-        // so distant / fully-visited zones stay reachable and agents don't all
-        // collapse onto whichever zone is closest to the spawn point.
-        float floorWeight = total * 0.02f / Mathf.Max(1, _manager.Zones.Length);
+        if (validCount == 0) return TargetSensorId;
+
+        // Proportional floor so distant/visited zones stay reachable
+        float floorWeight = total * 0.02f / Mathf.Max(1, validCount);
         for (int i = 0; i < weights.Length; i++)
         {
-            if (weights[i] < floorWeight)
+            if (weights[i] > 0f && weights[i] < floorWeight)
             {
                 total      += floorWeight - weights[i];
                 weights[i]  = floorWeight;
@@ -751,10 +764,15 @@ public class AgentController : MonoBehaviour
         float pick = Random.Range(0f, total);
         for (int i = 0; i < weights.Length; i++)
         {
+            if (weights[i] <= 0f) continue;
             pick -= weights[i];
             if (pick <= 0f) return _manager.Zones[i].sensorId;
         }
-        return _manager.Zones[_manager.Zones.Length - 1].sensorId;
+
+        // Fallback: return last zone with nonzero weight
+        for (int i = _manager.Zones.Length - 1; i >= 0; i--)
+            if (weights[i] > 0f) return _manager.Zones[i].sensorId;
+        return TargetSensorId;
     }
 
     // ── Physiological Drive Helpers ───────────────────────────────────
