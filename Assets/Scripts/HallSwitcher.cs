@@ -74,15 +74,7 @@ public class HallSwitcher : MonoBehaviour
     {
         if (halls == null || halls.Length == 0) return;
 
-        // Tab → next hall (wraps around)
-        if (Input.GetKeyDown(cycleKey))
-            SwitchTo((_activeIndex + 1) % halls.Length);
-
-        // Backtick → previous hall (wraps around)
-        if (Input.GetKeyDown(cyclePrevKey))
-            SwitchTo((_activeIndex - 1 + halls.Length) % halls.Length);
-
-        // F1 → toggle panel visibility
+        // F1 → toggle panel visibility (safe in Update; not consumed by IMGUI)
         if (Input.GetKeyDown(togglePanelKey))
             showPanel = !showPanel;
 
@@ -98,7 +90,26 @@ public class HallSwitcher : MonoBehaviour
 
     void OnGUI()
     {
-        if (!showPanel || halls == null || halls.Length == 0) return;
+        if (halls == null || halls.Length == 0) return;
+
+        // Intercept Tab / BackQuote here — IMGUI consumes both before Update ever sees them.
+        if (Event.current.type == EventType.KeyDown)
+        {
+            if (Event.current.keyCode == cycleKey)
+            {
+                SwitchTo((_activeIndex + 1) % halls.Length);
+                Event.current.Use();
+                return;
+            }
+            if (Event.current.keyCode == cyclePrevKey)
+            {
+                SwitchTo((_activeIndex - 1 + halls.Length) % halls.Length);
+                Event.current.Use();
+                return;
+            }
+        }
+
+        if (!showPanel) return;
         if (Event.current.type == EventType.Layout) return;
 
         EnsureStyles();

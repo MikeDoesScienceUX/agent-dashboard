@@ -715,23 +715,37 @@ public class AgentController : MonoBehaviour
 
         for (int i = 0; i < _manager.Zones.Length; i++)
         {
-            var   z       = _manager.Zones[i];
-            float dist    = Vector3.Distance(transform.position, z.GoalTransform.position);
-            float dens    = _manager.GetBoothDensity(z.sensorId);
+            var   z        = _manager.Zones[i];
+            float dist     = Vector3.Distance(transform.position, z.GoalTransform.position);
+            float dens     = _manager.GetBoothDensity(z.sensorId);
             float interest = GetZoneInterest(z.sensorId);
 
-            // Visit penalty: previously-visited zones are less attractive
             float visitPenalty = _visitedZones.Contains(z.sensorId)
                 ? Mathf.Pow(0.30f, _visitPenaltyMult)
                 : 1.0f;
 
+            // Quadratic density aversion: packed zones become much less attractive
+            // than linear (1+dens) would, preventing persistent crowding feedback loops.
             weights[i] = Mathf.Max(
                 z.areaM2 * (0.5f + interest * 0.5f) *
                 Mathf.Exp(-beta * dist) *
                 visitPenalty /
-                (1f + dens),
-                0.001f);
+                (1f + dens * dens),
+                0f);
             total += weights[i];
+        }
+
+        // Proportional floor: every zone gets at least 2% of an equal share,
+        // so distant / fully-visited zones stay reachable and agents don't all
+        // collapse onto whichever zone is closest to the spawn point.
+        float floorWeight = total * 0.02f / Mathf.Max(1, _manager.Zones.Length);
+        for (int i = 0; i < weights.Length; i++)
+        {
+            if (weights[i] < floorWeight)
+            {
+                total      += floorWeight - weights[i];
+                weights[i]  = floorWeight;
+            }
         }
 
         float pick = Random.Range(0f, total);
