@@ -389,8 +389,8 @@ public class SimulationHUD : MonoBehaviour
             for (int i = 0; i < Mathf.Min(_issues.Count, 4); i++)
             {
                 var iss = _issues[i];
-                GUIStyle s = iss.severity == SimValidator.Severity.Error ? _errorLabel : _warnLabel;
-                GUI.Label(new Rect(cx, cy, cw, 18f), $"• {iss.message}", s);
+                GUIStyle issStyle = iss.severity == SimValidator.Severity.Error ? _errorLabel : _warnLabel;
+                GUI.Label(new Rect(cx, cy, cw, 18f), $"• {iss.message}", issStyle);
                 cy += 18f;
             }
 
