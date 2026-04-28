@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: cookie
   displayName: cookiezone
+  sectionId: 
   areaM2: 673.3
   zoneType: exhibit
   topicTags: []
@@ -361,16 +362,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1739591097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &226883049 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8113751563935581848, guid: 4b008e1b6ee92194c9be81c3eac98a5b, type: 3}
-  m_PrefabInstance: {fileID: 1213807047}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &237107578 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -3453854749513859629, guid: a4f2944970bc50544b6146baa7ac1f9f, type: 3}
-  m_PrefabInstance: {fileID: 2085879367}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &274033649
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,6 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: burger
   displayName: burgerzone
+  sectionId: 
   areaM2: 31.7
   zoneType: exhibit
   topicTags: []
@@ -474,6 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: brownie
   displayName: browniezone
+  sectionId: 
   areaM2: 382.6
   zoneType: exhibit
   topicTags: []
@@ -569,13 +562,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.9998088, y: 0.0014996969, z: 0.0000292476, w: 0.019498555}
-  m_LocalPosition: {x: -100.89746, y: -44.267822, z: 171.79845}
+  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: -99.73517, y: -40.559143, z: 169.07436}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 733902769}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,6 +613,11 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &339835834 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4212960563234666764, guid: ec790cb051e3561439293613632037d9, type: 3}
+  m_PrefabInstance: {fileID: 826976254}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &364127122
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,13 +676,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369321339}
   serializedVersion: 2
-  m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: -36.83545, y: 15.498009, z: 75.02393}
+  m_LocalRotation: {x: 0.9999619, y: 0, z: 0, w: 0.008726652}
+  m_LocalPosition: {x: -196.46051, y: -70.46777, z: -804.77686}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 826976255}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 179, y: 0, z: 0}
 --- !u!114 &369321341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,11 +786,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!1 &399580919 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4212960563234666764, guid: ec790cb051e3561439293613632037d9, type: 3}
-  m_PrefabInstance: {fileID: 826976254}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,6 +1022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: papaya
   displayName: papayazone
+  sectionId: 
   areaM2: 115.5
   zoneType: exhibit
   topicTags: []
@@ -1116,6 +1110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: bubbly
   displayName: bubblyzone
+  sectionId: 
   areaM2: 207.8
   zoneType: exhibit
   topicTags: []
@@ -1172,6 +1167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: pasta
   displayName: pastazone
+  sectionId: 
   areaM2: 51.2
   zoneType: exhibit
   topicTags: []
@@ -1228,6 +1224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: vanilla
   displayName: vanillazone
+  sectionId: 
   areaM2: 88.9
   zoneType: exhibit
   topicTags: []
@@ -1315,6 +1312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: fries
   displayName: frieszone
+  sectionId: 
   areaM2: 50.4
   zoneType: exhibit
   topicTags: []
@@ -1371,6 +1369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: charizard
   displayName: charizardzone
+  sectionId: 
   areaM2: 195.4
   zoneType: exhibit
   topicTags: []
@@ -1535,6 +1534,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1785148322}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &715163579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8113751563935581848, guid: 4b008e1b6ee92194c9be81c3eac98a5b, type: 3}
+  m_PrefabInstance: {fileID: 1213807047}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &715961753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,6 +1617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: pikachu
   displayName: pikachuzone
+  sectionId: 
   areaM2: 2913.9
   zoneType: exhibit
   topicTags: []
@@ -1805,6 +1810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: snorlax
   displayName: snorlaxzone
+  sectionId: 
   areaM2: 227.9
   zoneType: exhibit
   topicTags: []
@@ -1861,6 +1867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: coconut
   displayName: coconutzone
+  sectionId: 
   areaM2: 60.8
   zoneType: exhibit
   topicTags: []
@@ -1992,16 +1999,43 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -417635760074336729, guid: ec790cb051e3561439293613632037d9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1996424227}
+    - targetCorrespondingSourceObject: {fileID: -417635760074336729, guid: ec790cb051e3561439293613632037d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1013988171}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4212960563234666764, guid: ec790cb051e3561439293613632037d9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 826976256}
+      addedObject: {fileID: 826976258}
   m_SourcePrefab: {fileID: 3198623641788530785, guid: ec790cb051e3561439293613632037d9, type: 3}
 --- !u!4 &826976255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -417635760074336729, guid: ec790cb051e3561439293613632037d9, type: 3}
   m_PrefabInstance: {fileID: 826976254}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &826976258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339835834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0e8a325373a13439369539db7e8821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
+  sensorId: hall_81_mezzanine
+  displayName: Hall 8.1 Mezzanine
+  sectionId: 
+  areaM2: 100
+  zoneType: exhibit
+  topicTags: []
+  goalPoint: {fileID: 1013988171}
+  spawnPoint: {fileID: 0}
+  zoneColor: {r: 1, g: 0.8, b: 0.2, a: 1}
+  gizmoBounds: {x: 12, y: 3, z: 9}
+  usePolygon: 0
+  polyPoints: []
 --- !u!1 &828447319
 GameObject:
   m_ObjectHideFlags: 0
@@ -2049,6 +2083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: watermelon
   displayName: watermelonzone
+  sectionId: 
   areaM2: 60.3
   zoneType: exhibit
   topicTags: []
@@ -2154,6 +2189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: turkey
   displayName: turkeyzone
+  sectionId: 
   areaM2: 65.9
   zoneType: exhibit
   topicTags: []
@@ -2303,6 +2339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: nachos
   displayName: nachoszone
+  sectionId: 
   areaM2: 49.8
   zoneType: exhibit
   topicTags: []
@@ -2359,6 +2396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: noodles
   displayName: noodleszone
+  sectionId: 
   areaM2: 7.4
   zoneType: exhibit
   topicTags: []
@@ -2446,6 +2484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: popsicle
   displayName: popsiclezone
+  sectionId: 
   areaM2: 266.9
   zoneType: exhibit
   topicTags: []
@@ -2455,6 +2494,37 @@ MonoBehaviour:
   gizmoBounds: {x: 18.506592, y: 0.5, z: 14.419617}
   usePolygon: 0
   polyPoints: []
+--- !u!1 &1013988170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1013988171}
+  m_Layer: 0
+  m_Name: GoalPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1013988171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013988170}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.99999976, z: 0.99999976}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 826976255}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1016800826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2533,6 +2603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: jelly
   displayName: jellyzone
+  sectionId: 
   areaM2: 382.6
   zoneType: exhibit
   topicTags: []
@@ -2620,6 +2691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: chocolate
   displayName: chocolatezone
+  sectionId: 
   areaM2: 52.7
   zoneType: exhibit
   topicTags: []
@@ -2676,6 +2748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: chicken
   displayName: chickenzone
+  sectionId: 
   areaM2: 111.5
   zoneType: exhibit
   topicTags: []
@@ -2732,6 +2805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: yoghurt
   displayName: yoghurtzone
+  sectionId: 
   areaM2: 207.8
   zoneType: exhibit
   topicTags: []
@@ -2788,6 +2862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: pizza
   displayName: pizzazone
+  sectionId: 
   areaM2: 37.7
   zoneType: exhibit
   topicTags: []
@@ -2844,6 +2919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: lasagna
   displayName: lasagnazone
+  sectionId: 
   areaM2: 76.9
   zoneType: exhibit
   topicTags: []
@@ -2900,6 +2976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: sushi
   displayName: sushizone
+  sectionId: 
   areaM2: 7.4
   zoneType: exhibit
   topicTags: []
@@ -2956,6 +3033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: poki
   displayName: pokizone
+  sectionId: 
   areaM2: 207.8
   zoneType: exhibit
   topicTags: []
@@ -2965,6 +3043,11 @@ MonoBehaviour:
   gizmoBounds: {x: 14.40979, y: 0.5, z: 14.419617}
   usePolygon: 0
   polyPoints: []
+--- !u!1 &1148126337 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3453854749513859629, guid: a4f2944970bc50544b6146baa7ac1f9f, type: 3}
+  m_PrefabInstance: {fileID: 2085879367}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1167048080
 GameObject:
   m_ObjectHideFlags: 0
@@ -3074,6 +3157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: squirtle
   displayName: squirtlezone
+  sectionId: 
   areaM2: 195.4
   zoneType: exhibit
   topicTags: []
@@ -3114,6 +3198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: grape
   displayName: grapezone
+  sectionId: 
   areaM2: 48.6
   zoneType: exhibit
   topicTags: []
@@ -3222,16 +3307,43 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7971015418579588424, guid: 4b008e1b6ee92194c9be81c3eac98a5b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1334107965}
+    - targetCorrespondingSourceObject: {fileID: 7971015418579588424, guid: 4b008e1b6ee92194c9be81c3eac98a5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2009171030}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -8113751563935581848, guid: 4b008e1b6ee92194c9be81c3eac98a5b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1213807049}
+      addedObject: {fileID: 1213807051}
   m_SourcePrefab: {fileID: 3198623641788530785, guid: 4b008e1b6ee92194c9be81c3eac98a5b, type: 3}
 --- !u!4 &1213807048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7971015418579588424, guid: 4b008e1b6ee92194c9be81c3eac98a5b, type: 3}
   m_PrefabInstance: {fileID: 1213807047}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1213807051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715163579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0e8a325373a13439369539db7e8821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
+  sensorId: hall_81
+  displayName: Hall 8.1
+  sectionId: 
+  areaM2: 80
+  zoneType: exhibit
+  topicTags: []
+  goalPoint: {fileID: 2009171030}
+  spawnPoint: {fileID: 0}
+  zoneColor: {r: 0.4, g: 0.9, b: 0.5, a: 1}
+  gizmoBounds: {x: 10, y: 3, z: 8}
+  usePolygon: 0
+  polyPoints: []
 --- !u!1 &1214911675
 GameObject:
   m_ObjectHideFlags: 0
@@ -3372,6 +3484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: raspberry
   displayName: raspberryzone
+  sectionId: 
   areaM2: 266.6
   zoneType: exhibit
   topicTags: []
@@ -3645,6 +3758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: taco
   displayName: tacozone
+  sectionId: 
   areaM2: 58.7
   zoneType: exhibit
   topicTags: []
@@ -3701,6 +3815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: muskmelon
   displayName: muskmelonzone
+  sectionId: 
   areaM2: 28
   zoneType: exhibit
   topicTags: []
@@ -3788,6 +3903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: icecream
   displayName: icecreamzone
+  sectionId: 
   areaM2: 207.8
   zoneType: exhibit
   topicTags: []
@@ -3844,6 +3960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: meowth
   displayName: meowthzone
+  sectionId: 
   areaM2: 228.2
   zoneType: exhibit
   topicTags: []
@@ -3915,6 +4032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: blueberry
   displayName: blueberryzone
+  sectionId: 
   areaM2: 42.8
   zoneType: exhibit
   topicTags: []
@@ -4018,6 +4136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: mango
   displayName: mangozone
+  sectionId: 
   areaM2: 60.3
   zoneType: exhibit
   topicTags: []
@@ -4074,6 +4193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: pudding
   displayName: puddingzone
+  sectionId: 
   areaM2: 382.6
   zoneType: exhibit
   topicTags: []
@@ -4161,6 +4281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: hotdog
   displayName: hotdogzone
+  sectionId: 
   areaM2: 34.8
   zoneType: exhibit
   topicTags: []
@@ -4310,6 +4431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: palmyra
   displayName: palmyrazone
+  sectionId: 
   areaM2: 55.5
   zoneType: exhibit
   topicTags: []
@@ -4397,6 +4519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: samosa
   displayName: samosazone
+  sectionId: 
   areaM2: 60.4
   zoneType: exhibit
   topicTags: []
@@ -4453,6 +4576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: koolaid
   displayName: koolaidzone
+  sectionId: 
   areaM2: 46.7
   zoneType: exhibit
   topicTags: []
@@ -4509,6 +4633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: tomato
   displayName: tomatozone
+  sectionId: 
   areaM2: 298.8
   zoneType: exhibit
   topicTags: []
@@ -4565,6 +4690,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: timtam
   displayName: timtamzone
+  sectionId: 
   areaM2: 64.1
   zoneType: exhibit
   topicTags: []
@@ -4583,8 +4709,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1845851946}
-  - component: {fileID: 1845851945}
-  - component: {fileID: 1845851944}
   - component: {fileID: 1845851952}
   - component: {fileID: 1845851951}
   - component: {fileID: 1845851950}
@@ -4599,54 +4723,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1845851944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845851943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24b36e8d48331394f9c6e69095f8dae4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AgentSpawner
-  startPoint: {fileID: 0}
-  agentPrefab: {fileID: 8100041083263749430, guid: 9fa5e27c981bf804ca36387b62890aff, type: 3}
-  goals:
-  - goal: {fileID: 0}
-    count: 500
-  - goal: {fileID: 0}
-    count: 40
-  - goal: {fileID: 0}
-    count: 40
-  - goal: {fileID: 0}
-    count: 40
-  - goal: {fileID: 0}
-    count: 40
-  - goal: {fileID: 0}
-    count: 300
-  - goal: {fileID: 0}
-    count: 40
-  - goal: {fileID: 0}
-    count: 40
-  - goal: {fileID: 0}
-    count: 40
-  spawnRadius: 3
-  LoginsPerSecond: 20
-  StartFromEntrance: 1
---- !u!114 &1845851945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845851943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52783489721c2c742a5ff342b1e1d7df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ConfigLoader
 --- !u!4 &1845851946
 Transform:
   m_ObjectHideFlags: 0
@@ -4702,6 +4778,7 @@ MonoBehaviour:
   screenshotKey: 293
   showHUD: 1
   panelWidth: 330
+  uiScale: 0
 --- !u!114 &1845851949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4765,16 +4842,16 @@ MonoBehaviour:
   dataLoader: {fileID: 1845851951}
   agentPrefab: {fileID: 8100041083263749430, guid: 9fa5e27c981bf804ca36387b62890aff, type: 3}
   spawnPoints:
-  - {fileID: 1329114177}
   - {fileID: 1016800827}
   - {fileID: 644975573}
-  - {fileID: 1863774808}
+  - {fileID: 1329114177}
   - {fileID: 715961754}
+  - {fileID: 1863774808}
   exitPoints:
-  - {fileID: 129170426}
-  - {fileID: 422454749}
-  - {fileID: 1334107965}
   - {fileID: 1996424227}
+  - {fileID: 1334107965}
+  - {fileID: 422454749}
+  - {fileID: 129170426}
   timeScaleMultiplier: 1
   attendeeScaleMultiplier: 1
   poolWarmupSize: 50
@@ -4879,8 +4956,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922192658}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.99998987, y: -0, z: -0, w: -0.004499912}
-  m_LocalPosition: {x: -69.328064, y: 48.175415, z: 183.05814}
+  m_LocalRotation: {x: 1, y: -0, z: -0, w: -0.000000119209275}
+  m_LocalPosition: {x: -66.53992, y: 40.11754, z: 157.28725}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5047,13 +5124,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938083206}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.99992687, y: 0.005999562, z: 0.000062994186, w: 0.010499655}
-  m_LocalPosition: {x: -95.62671, y: -66.28616, z: 183.87646}
+  m_LocalRotation: {x: 0.99984777, y: -0, z: -0, w: 0.017452447}
+  m_LocalPosition: {x: -95.62671, y: -66.88907, z: 165.85608}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2085879368}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 178, y: 0, z: 0}
 --- !u!114 &1938083208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5157,6 +5234,37 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1943321850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1943321851}
+  m_Layer: 0
+  m_Name: GoalPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1943321851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943321850}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.99999976, z: 0.99999976}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2085879368}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1996424226
 GameObject:
   m_ObjectHideFlags: 0
@@ -5187,6 +5295,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 826976255}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2009171029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2009171030}
+  m_Layer: 0
+  m_Name: GoalPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2009171030
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009171029}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.99999976, z: 0.99999976}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1213807048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2009943940
 GameObject:
@@ -5297,6 +5436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: tiramisu
   displayName: tiramisuzone
+  sectionId: 
   areaM2: 327.5
   zoneType: exhibit
   topicTags: []
@@ -5435,16 +5575,43 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8974745479574613902, guid: a4f2944970bc50544b6146baa7ac1f9f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 422454749}
+    - targetCorrespondingSourceObject: {fileID: -8974745479574613902, guid: a4f2944970bc50544b6146baa7ac1f9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1943321851}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -3453854749513859629, guid: a4f2944970bc50544b6146baa7ac1f9f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2085879369}
+      addedObject: {fileID: 2085879371}
   m_SourcePrefab: {fileID: 3198623641788530785, guid: a4f2944970bc50544b6146baa7ac1f9f, type: 3}
 --- !u!4 &2085879368 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8974745479574613902, guid: a4f2944970bc50544b6146baa7ac1f9f, type: 3}
   m_PrefabInstance: {fileID: 2085879367}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2085879371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148126337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0e8a325373a13439369539db7e8821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
+  sensorId: hall_8
+  displayName: Hall 8
+  sectionId: 
+  areaM2: 80
+  zoneType: exhibit
+  topicTags: []
+  goalPoint: {fileID: 1943321851}
+  spawnPoint: {fileID: 0}
+  zoneColor: {r: 0.3, g: 0.6, b: 1, a: 1}
+  gizmoBounds: {x: 10, y: 3, z: 8}
+  usePolygon: 0
+  polyPoints: []
 --- !u!1 &2104402617
 GameObject:
   m_ObjectHideFlags: 0
@@ -5523,6 +5690,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConferenceZone
   sensorId: burrito
   displayName: burritozone
+  sectionId: 
   areaM2: 111.4
   zoneType: exhibit
   topicTags: []

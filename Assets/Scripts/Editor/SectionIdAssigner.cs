@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// Window > Conference Sim > Assign Section IDs
+/// Conference Sim > Assign Section IDs
 ///
 /// Automatically stamps ConferenceZone.sectionId on every zone in the scene by
 /// finding the HallSwitcher camera whose position is closest to each zone.
@@ -17,7 +17,7 @@ using UnityEngine;
 /// </summary>
 public class SectionIdAssigner : EditorWindow
 {
-    [MenuItem("Window/Conference Sim/Assign Section IDs")]
+    [MenuItem("Conference Sim/Assign Section IDs")]
     public static void Open() => GetWindow<SectionIdAssigner>("Section IDs");
 
     private HallSwitcher  _switcher;

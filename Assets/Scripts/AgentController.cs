@@ -14,7 +14,6 @@ using UnityEngine.AI;
 /// Groups:       Cohesion force keeps group members together; socializing is contagious within groups
 /// Sigmoid crowd:Avoidance probability is a smooth sigmoid of density, modulated by topic interest
 /// Smooth redirect: Session redirects queue until the current activity ends (or max-delay expires)
-/// LLM:          Optional async conversation snippet generation during Socializing (via LLMConversationClient)
 ///
 /// SFM uses CrowdManager.Grid (spatial hash) — O(n) not O(n²).
 /// Wall forces use NavMesh.FindClosestEdge — no physics overhead.
@@ -106,9 +105,6 @@ public class AgentController : MonoBehaviour
     private string    _pendingRedirectZoneId;
     private float     _pendingRedirectTimer;   // countdown; 0 = no pending redirect
 
-    // ── LLM conversation ─────────────────────────────────────────────
-    private bool _llmPending;  // prevent double-fire for same socializing session
-
     // ── Initialisation ───────────────────────────────────────────────
 
     /// <summary>Called by CrowdManager immediately after obtaining an agent from the pool.</summary>
@@ -169,7 +165,6 @@ public class AgentController : MonoBehaviour
         _pendingRedirectGoal   = null;
         _pendingRedirectZoneId = null;
         _pendingRedirectTimer  = 0f;
-        _llmPending = false;
 
         // Build interest-weighted agenda from available zones
         BuildAgenda();
@@ -194,7 +189,6 @@ public class AgentController : MonoBehaviour
         _pendingRedirectGoal   = null;
         _pendingRedirectZoneId = null;
         _pendingRedirectTimer  = 0f;
-        _llmPending = false;
         _visitedZones.Clear();
         _agendaQueue.Clear();
 
@@ -421,17 +415,9 @@ public class AgentController : MonoBehaviour
         _nav.isStopped = true;
         _stateTimer   -= dt;
 
-        // Fire LLM conversation once per socializing session
-        if (!_llmPending && _config.llmEnabled)
-        {
-            _llmPending = true;
-            TryFireLLMConversation();
-        }
-
         if (_stateTimer <= 0f)
         {
             _nav.isStopped = false;
-            _llmPending    = false;
 
             if (HasPendingRedirect()) { ApplyPendingRedirect(); return; }
             EnterState(Random.value < 0.5f ? AgentState.Transit : AgentState.Roaming);
@@ -528,7 +514,6 @@ public class AgentController : MonoBehaviour
                 float phaseS   = GetDayPhaseSocializeMult();
                 _stateTimer    = Random.Range(_config.socializeDurationMin, _config.socializeDurationMax)
                                  * _socializeMult * phaseS;
-                _llmPending    = false;
 
                 // Trigger group contagion — nearby group peers may join
                 if (_group != null)
@@ -872,32 +857,6 @@ public class AgentController : MonoBehaviour
         int idx = _manager != null ? _manager.CurrentDayPhaseIndex : -1;
         if (idx < 0 || _config.dayPhases == null || idx >= _config.dayPhases.Length) return 1f;
         return _config.dayPhases[idx].restMult;
-    }
-
-    // ── LLM Conversation ─────────────────────────────────────────────
-
-    private void TryFireLLMConversation()
-    {
-        var llmClient = LLMConversationClient.Instance;
-        if (llmClient == null) return;
-
-        // Find the nearest socializing neighbour as conversation partner
-        AgentController partner = null;
-        float bestDist = 4f;
-        foreach (var n in _neighbours)
-        {
-            if (n == null || n == this) continue;
-            if (n.CurrentState != AgentState.Socializing) continue;
-            float d = Vector3.Distance(transform.position, n.transform.position);
-            if (d < bestDist) { bestDist = d; partner = n; }
-        }
-
-        llmClient.RequestConversation(this, partner, (topic) =>
-        {
-            // Conversation topic logged — could drive follow-up zone selection
-            if (!string.IsNullOrEmpty(topic))
-                Debug.Log($"[LLM] Agent {PersonaName} at {TargetSensorId}: \"{topic}\"");
-        });
     }
 
     // ── State Color ──────────────────────────────────────────────────

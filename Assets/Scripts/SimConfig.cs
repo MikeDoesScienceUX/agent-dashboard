@@ -232,22 +232,6 @@ public class SimConfig : ScriptableObject
     public float redirectMaxDelay = 120f;
 
 
-    // ── LLM CONVERSATION ────────────────────────────────────────────
-
-    [Header("LLM Conversation (Optional)")]
-    [Tooltip("Enable LLM-generated conversation snippets during the Socializing state.")]
-    public bool llmEnabled = false;
-
-    [Tooltip("Anthropic API key. If blank, falls back to ANTHROPIC_API_KEY environment variable.")]
-    public string llmApiKey = "";
-
-    [Tooltip("Claude model ID to use for lightweight conversation generation.")]
-    public string llmModel = "claude-haiku-4-5-20251001";
-
-    [Tooltip("Maximum LLM calls allowed per simulated minute (rate-limit control).")]
-    public int llmCallsPerSimMinute = 3;
-
-
     // ── AUTO-CALIBRATION ────────────────────────────────────────────
 
     [Header("Auto-Calibration")]
