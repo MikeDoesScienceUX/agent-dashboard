@@ -723,10 +723,14 @@ public class AgentController : MonoBehaviour
                 ? Mathf.Pow(0.30f, _visitPenaltyMult)
                 : 1.0f;
 
+            // Calibration bias: additive log-weight offset from previous run (exp so it's a multiplier)
+            float calBias = Mathf.Exp(_manager.GetZoneGravityBias(z.sensorId));
+
             weights[i] = Mathf.Max(
                 z.areaM2 * (0.5f + interest * 0.5f) *
                 Mathf.Exp(-beta * dist) *
-                visitPenalty /
+                visitPenalty *
+                calBias /
                 (1f + dens * dens),
                 0f);
             total += weights[i];

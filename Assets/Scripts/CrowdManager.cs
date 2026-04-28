@@ -24,6 +24,8 @@ public class CrowdManager : MonoBehaviour
     public SimConfig config;
     public DataLoader dataLoader;
     public GameObject agentPrefab;
+    [Tooltip("Optional. When assigned, zone gravity weights are nudged by per-run calibration offsets.")]
+    public CalibrationManager calibrationManager;
 
     [Header("Spawn & Exit Points")]
     public Transform[] spawnPoints;
@@ -104,6 +106,8 @@ public class CrowdManager : MonoBehaviour
 
         if (dataLoader == null)
             Debug.LogWarning("[CrowdManager] dataLoader not assigned — CSV-driven spawning disabled.");
+        if (calibrationManager == null)
+            calibrationManager = FindFirstObjectByType<CalibrationManager>();
 
         Grid = new SpatialGrid(5f);
 
@@ -371,6 +375,9 @@ public class CrowdManager : MonoBehaviour
         if (nav != null) nav.enabled = false;
         go.SetActive(false);
         _pool.Enqueue(go);
+
+        // Prune dissolved groups (all members gone) to prevent unbounded list growth
+        _groups.RemoveAll(g => g.Members.Count == 0);
     }
 
     // ── Departures ───────────────────────────────────────────────────
@@ -440,8 +447,15 @@ public class CrowdManager : MonoBehaviour
     {
         if (!_agentsByZone.TryGetValue(zoneId, out var list)) return;
         foreach (var a in list)
-            if (a != null && a.CurrentState == AgentController.AgentState.Dwelling)
+        {
+            if (a == null) continue;
+            var s = a.CurrentState;
+            if (s == AgentController.AgentState.Dwelling   ||
+                s == AgentController.AgentState.Roaming    ||
+                s == AgentController.AgentState.Socializing ||
+                s == AgentController.AgentState.Resting)
                 a.RouteToExit();
+        }
     }
 
     /// <summary>Transfers a single agent to a new zone (gravity-driven drift).</summary>
@@ -476,6 +490,13 @@ public class CrowdManager : MonoBehaviour
     }
 
     // ── Zone Metadata API (used by AgentController) ──────────────────
+
+    /// <summary>
+    /// Returns the calibration gravity-bias offset for a zone (0 if no calibration data).
+    /// Applied as an exponential weight multiplier in AgentController.PickDestinationZone().
+    /// </summary>
+    public float GetZoneGravityBias(string sensorId)
+        => calibrationManager != null ? calibrationManager.GetZoneBias(sensorId) : 0f;
 
     /// <summary>Returns true if a ConferenceZone with this sensorId exists.</summary>
     public bool ZoneExists(string sensorId) => _zoneLookup.ContainsKey(sensorId);

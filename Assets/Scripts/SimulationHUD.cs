@@ -399,7 +399,7 @@ public class SimulationHUD : MonoBehaviour
 
         // ── Hotkey hint ───────────────────────────────────────────
         GUI.Label(new Rect(cx, cy, cw, 18f),
-            $"[{toggleHUD}] HUD  [{toggleHeatmap}] heat  [{pauseKey}] pause  [{screenshotKey}] snap  [Tab] halls", _subLabel);
+            $"[{toggleHUD}] HUD  [{pauseKey}] pause  [{screenshotKey}] snap  [Tab] halls", _subLabel);
 
         GUI.matrix = prevMatrix;
     }

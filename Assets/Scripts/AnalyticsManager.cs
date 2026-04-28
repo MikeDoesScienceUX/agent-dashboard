@@ -367,31 +367,38 @@ public class AnalyticsManager : MonoBehaviour
 
     private void ExportHeatmapPng()
     {
-        // Find max hit count for normalisation
-        int max = 1;
-        for (int x = 0; x < _gridW; x++)
-        for (int z = 0; z < _gridH; z++)
-            if (_heatmap[x, z] > max) max = _heatmap[x, z];
-
-        var tex    = new Texture2D(_gridW, _gridH, TextureFormat.RGBA32, false);
-        var pixels = new Color[_gridW * _gridH];
-
-        for (int x = 0; x < _gridW; x++)
-        for (int z = 0; z < _gridH; z++)
+        try
         {
-            float t = (float)_heatmap[x, z] / max;
-            pixels[z * _gridW + x] = HeatColor(t);
+            // Find max hit count for normalisation
+            int max = 1;
+            for (int x = 0; x < _gridW; x++)
+            for (int z = 0; z < _gridH; z++)
+                if (_heatmap[x, z] > max) max = _heatmap[x, z];
+
+            var tex    = new Texture2D(_gridW, _gridH, TextureFormat.RGBA32, false);
+            var pixels = new Color[_gridW * _gridH];
+
+            for (int x = 0; x < _gridW; x++)
+            for (int z = 0; z < _gridH; z++)
+            {
+                float t = (float)_heatmap[x, z] / max;
+                pixels[z * _gridW + x] = HeatColor(t);
+            }
+
+            tex.SetPixels(pixels);
+            tex.Apply(false);
+
+            byte[] png  = tex.EncodeToPNG();
+            Destroy(tex);
+
+            string path = Path.Combine(Application.dataPath, "SimOutput", "heatmap.png");
+            File.WriteAllBytes(path, png);
+            Debug.Log($"[AnalyticsManager] Heatmap PNG → {path}");
         }
-
-        tex.SetPixels(pixels);
-        tex.Apply(false);
-
-        byte[] png  = tex.EncodeToPNG();
-        Destroy(tex);
-
-        string path = Path.Combine(Application.dataPath, "SimOutput", "heatmap.png");
-        File.WriteAllBytes(path, png);
-        Debug.Log($"[AnalyticsManager] Heatmap PNG → {path}");
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"[AnalyticsManager] Heatmap PNG export failed (graphics context may be unavailable): {ex.Message}");
+        }
     }
 
     private static Color HeatColor(float t)
