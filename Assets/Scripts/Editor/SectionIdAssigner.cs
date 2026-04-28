@@ -23,6 +23,7 @@ public class SectionIdAssigner : EditorWindow
     private HallSwitcher  _switcher;
     private ConferenceZone[] _zones;
     private Vector2 _scroll;
+    private string _manualSectionId = "Hall A";
 
     private void OnEnable() => Refresh();
 
@@ -57,9 +58,33 @@ public class SectionIdAssigner : EditorWindow
         if (!hasSwitcher)
         {
             EditorGUILayout.HelpBox(
-                "No HallSwitcher found, or its halls array is empty.\n" +
-                "Add a HallSwitcher to the scene and assign at least one hall camera.",
-                MessageType.Error);
+                "No HallSwitcher found (or its halls array is empty).\n" +
+                "Use Manual Assignment below, or add a HallSwitcher to the scene for auto-detection.",
+                MessageType.Warning);
+
+            EditorGUILayout.Space(4);
+            EditorGUILayout.LabelField("Manual Assignment", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField($"Zones found: {(_zones != null ? _zones.Length : 0)}");
+            EditorGUILayout.Space(2);
+            _manualSectionId = EditorGUILayout.TextField("Section ID", _manualSectionId);
+            EditorGUILayout.Space(4);
+
+            GUI.enabled = _zones != null && _zones.Length > 0 && !string.IsNullOrWhiteSpace(_manualSectionId);
+            if (GUILayout.Button($"Assign \"{_manualSectionId}\" to All Zones", GUILayout.Height(32)))
+            {
+                Undo.RecordObjects(_zones, "Assign Zone Section IDs");
+                foreach (var zone in _zones)
+                {
+                    zone.sectionId = _manualSectionId.Trim();
+                    EditorUtility.SetDirty(zone);
+                }
+                Debug.Log($"[SectionIdAssigner] Stamped sectionId=\"{_manualSectionId}\" on {_zones.Length} zones.");
+            }
+            GUI.enabled = true;
+
+            EditorGUILayout.Space(4);
+            if (GUILayout.Button("Clear All Section IDs", GUILayout.Height(24)))
+                ClearSections();
             return;
         }
 
