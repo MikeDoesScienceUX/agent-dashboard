@@ -1,8 +1,8 @@
 {
-    "totalSimDurationSec": 36.941986083984378,
+    "totalSimDurationSec": 1796.4639892578125,
     "zonesMonitored": 46,
-    "peakOccupancyZone": "burrito",
+    "peakOccupancyZone": "raspberry",
     "peakOccupancyCount": 0,
     "avgDwellTimeSec": 0.0,
-    "exportTimestamp": "2026-04-14T12:59:06.2665780Z"
+    "exportTimestamp": "2026-05-05T06:35:31.0260693Z"
 }

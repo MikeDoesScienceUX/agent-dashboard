@@ -1,242 +1,242 @@
 {
-    "overallRMSE": 1.2294827699661255,
-    "overallNRMSE": 2.1147103309631349,
-    "chiSquared": 25.0,
-    "chiSquaredCritical_p05": 54.56869125366211,
-    "degreesOfFreedom": 39,
-    "chiSquaredPasses": true,
+    "overallRMSE": 2.8174428939819338,
+    "overallNRMSE": 1.6371625661849976,
+    "chiSquared": 222.0,
+    "chiSquaredCritical_p05": 152.09437561035157,
+    "degreesOfFreedom": 125,
+    "chiSquaredPasses": false,
     "pearsonR": 0.0,
     "perSensor": [
         {
             "sensorId": "blueberry",
-            "rmse": 3.0,
-            "nrmse": 1.0,
-            "chiSqContrib": 3.0,
-            "meanObserved": 3.0,
+            "rmse": 4.830459117889404,
+            "nrmse": 1.0350984334945679,
+            "chiSqContrib": 14.0,
+            "meanObserved": 4.666666507720947,
             "meanSimulated": 0.0,
-            "bias": -3.0
+            "bias": -4.666666507720947
         },
         {
             "sensorId": "raspberry",
-            "rmse": 3.0,
-            "nrmse": 1.0,
-            "chiSqContrib": 6.0,
-            "meanObserved": 3.0,
+            "rmse": 4.830459117889404,
+            "nrmse": 1.0350984334945679,
+            "chiSqContrib": 28.0,
+            "meanObserved": 4.666666507720947,
             "meanSimulated": 0.0,
-            "bias": -3.0
+            "bias": -4.666666507720947
         },
         {
             "sensorId": "mango",
-            "rmse": 3.0,
-            "nrmse": 1.0,
-            "chiSqContrib": 9.0,
-            "meanObserved": 3.0,
+            "rmse": 4.830459117889404,
+            "nrmse": 1.0350984334945679,
+            "chiSqContrib": 42.0,
+            "meanObserved": 4.666666507720947,
             "meanSimulated": 0.0,
-            "bias": -3.0
+            "bias": -4.666666507720947
         },
         {
             "sensorId": "coconut",
-            "rmse": 3.0,
-            "nrmse": 1.0,
-            "chiSqContrib": 12.0,
-            "meanObserved": 3.0,
+            "rmse": 4.830459117889404,
+            "nrmse": 1.0350984334945679,
+            "chiSqContrib": 56.0,
+            "meanObserved": 4.666666507720947,
             "meanSimulated": 0.0,
-            "bias": -3.0
+            "bias": -4.666666507720947
         },
         {
             "sensorId": "palmyra",
-            "rmse": 3.0,
-            "nrmse": 1.0,
-            "chiSqContrib": 15.0,
-            "meanObserved": 3.0,
+            "rmse": 4.830459117889404,
+            "nrmse": 1.0350984334945679,
+            "chiSqContrib": 70.0,
+            "meanObserved": 4.666666507720947,
             "meanSimulated": 0.0,
-            "bias": -3.0
+            "bias": -4.666666507720947
         },
         {
             "sensorId": "papaya",
-            "rmse": 2.0,
-            "nrmse": 1.0,
-            "chiSqContrib": 17.0,
-            "meanObserved": 2.0,
+            "rmse": 5.099019527435303,
+            "nrmse": 1.0926470756530762,
+            "chiSqContrib": 84.0,
+            "meanObserved": 4.666666507720947,
             "meanSimulated": 0.0,
-            "bias": -2.0
+            "bias": -4.666666507720947
         },
         {
             "sensorId": "watermelon",
-            "rmse": 2.0,
-            "nrmse": 1.0,
-            "chiSqContrib": 19.0,
-            "meanObserved": 2.0,
+            "rmse": 5.099019527435303,
+            "nrmse": 1.0926470756530762,
+            "chiSqContrib": 98.0,
+            "meanObserved": 4.666666507720947,
             "meanSimulated": 0.0,
-            "bias": -2.0
+            "bias": -4.666666507720947
         },
         {
             "sensorId": "tomato",
-            "rmse": 2.0,
-            "nrmse": 1.0,
-            "chiSqContrib": 21.0,
-            "meanObserved": 2.0,
+            "rmse": 5.099019527435303,
+            "nrmse": 1.0926470756530762,
+            "chiSqContrib": 112.0,
+            "meanObserved": 4.666666507720947,
             "meanSimulated": 0.0,
-            "bias": -2.0
+            "bias": -4.666666507720947
         },
         {
             "sensorId": "muskmelon",
-            "rmse": 2.0,
-            "nrmse": 1.0,
-            "chiSqContrib": 23.0,
-            "meanObserved": 2.0,
+            "rmse": 5.099019527435303,
+            "nrmse": 1.0926470756530762,
+            "chiSqContrib": 126.0,
+            "meanObserved": 4.666666507720947,
             "meanSimulated": 0.0,
-            "bias": -2.0
+            "bias": -4.666666507720947
         },
         {
             "sensorId": "grape",
-            "rmse": 2.0,
-            "nrmse": 1.0,
-            "chiSqContrib": 25.0,
+            "rmse": 5.099019527435303,
+            "nrmse": 1.0926470756530762,
+            "chiSqContrib": 140.0,
+            "meanObserved": 4.666666507720947,
+            "meanSimulated": 0.0,
+            "bias": -4.666666507720947
+        },
+        {
+            "sensorId": "cookie",
+            "rmse": 2.58198881149292,
+            "nrmse": 1.29099440574646,
+            "chiSqContrib": 146.0,
             "meanObserved": 2.0,
             "meanSimulated": 0.0,
             "bias": -2.0
         },
         {
-            "sensorId": "cookie",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
-            "meanSimulated": 0.0,
-            "bias": 0.0
-        },
-        {
             "sensorId": "tiramisu",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 2.58198881149292,
+            "nrmse": 1.29099440574646,
+            "chiSqContrib": 152.0,
+            "meanObserved": 2.0,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -2.0
         },
         {
             "sensorId": "jelly",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 2.58198881149292,
+            "nrmse": 1.29099440574646,
+            "chiSqContrib": 158.0,
+            "meanObserved": 2.0,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -2.0
         },
         {
             "sensorId": "yoghurt",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 2.58198881149292,
+            "nrmse": 1.29099440574646,
+            "chiSqContrib": 164.0,
+            "meanObserved": 2.0,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -2.0
         },
         {
             "sensorId": "bubbly",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 2.58198881149292,
+            "nrmse": 1.29099440574646,
+            "chiSqContrib": 170.0,
+            "meanObserved": 2.0,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -2.0
         },
         {
             "sensorId": "brownie",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 2.886751174926758,
+            "nrmse": 1.237179160118103,
+            "chiSqContrib": 177.0,
+            "meanObserved": 2.3333332538604738,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -2.3333332538604738
         },
         {
             "sensorId": "pudding",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 2.886751174926758,
+            "nrmse": 1.237179160118103,
+            "chiSqContrib": 184.0,
+            "meanObserved": 2.3333332538604738,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -2.3333332538604738
         },
         {
             "sensorId": "icecream",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 2.886751174926758,
+            "nrmse": 1.237179160118103,
+            "chiSqContrib": 191.0,
+            "meanObserved": 2.3333332538604738,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -2.3333332538604738
         },
         {
             "sensorId": "poki",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 2.886751174926758,
+            "nrmse": 1.237179160118103,
+            "chiSqContrib": 198.0,
+            "meanObserved": 2.3333332538604738,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -2.3333332538604738
         },
         {
             "sensorId": "popsicle",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 2.886751174926758,
+            "nrmse": 1.237179160118103,
+            "chiSqContrib": 205.0,
+            "meanObserved": 2.3333332538604738,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -2.3333332538604738
         },
         {
             "sensorId": "pikachu",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 1.7320507764816285,
+            "nrmse": 1.7320507764816285,
+            "chiSqContrib": 208.0,
+            "meanObserved": 1.0,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -1.0
         },
         {
             "sensorId": "charizard",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 1.7320507764816285,
+            "nrmse": 1.7320507764816285,
+            "chiSqContrib": 211.0,
+            "meanObserved": 1.0,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -1.0
         },
         {
             "sensorId": "meowth",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 1.7320507764816285,
+            "nrmse": 1.7320507764816285,
+            "chiSqContrib": 214.0,
+            "meanObserved": 1.0,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -1.0
         },
         {
             "sensorId": "snorlax",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 2.309401035308838,
+            "nrmse": 1.7320507764816285,
+            "chiSqContrib": 218.0,
+            "meanObserved": 1.3333333730697632,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -1.3333333730697632
         },
         {
             "sensorId": "squirtle",
-            "rmse": 0.0,
-            "nrmse": 0.0,
-            "chiSqContrib": 25.0,
-            "meanObserved": 0.0,
+            "rmse": 2.309401035308838,
+            "nrmse": 1.7320507764816285,
+            "chiSqContrib": 222.0,
+            "meanObserved": 1.3333333730697632,
             "meanSimulated": 0.0,
-            "bias": 0.0
+            "bias": -1.3333333730697632
         },
         {
             "sensorId": "pizza",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -245,7 +245,7 @@
             "sensorId": "lasagna",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -254,7 +254,7 @@
             "sensorId": "taco",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -263,7 +263,7 @@
             "sensorId": "pasta",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -272,7 +272,7 @@
             "sensorId": "timtam",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -281,7 +281,7 @@
             "sensorId": "chicken",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -290,7 +290,7 @@
             "sensorId": "hotdog",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -299,7 +299,7 @@
             "sensorId": "vanilla",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -308,7 +308,7 @@
             "sensorId": "noodles",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -317,7 +317,7 @@
             "sensorId": "burger",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -326,7 +326,7 @@
             "sensorId": "nachos",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -335,7 +335,7 @@
             "sensorId": "burrito",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -344,7 +344,7 @@
             "sensorId": "samosa",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -353,7 +353,7 @@
             "sensorId": "fries",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -362,7 +362,7 @@
             "sensorId": "turkey",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -371,7 +371,7 @@
             "sensorId": "koolaid",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -380,7 +380,7 @@
             "sensorId": "chocolate",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
@@ -389,7 +389,7 @@
             "sensorId": "sushi",
             "rmse": 0.0,
             "nrmse": 0.0,
-            "chiSqContrib": 25.0,
+            "chiSqContrib": 222.0,
             "meanObserved": 0.0,
             "meanSimulated": 0.0,
             "bias": 0.0
